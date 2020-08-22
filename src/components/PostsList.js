@@ -1,5 +1,6 @@
 import React from 'react';
 import faker from 'faker';
+import PropTypes from 'prop-types';
 
 class PostsList extends React.Component {
   render() {
@@ -7,7 +8,7 @@ class PostsList extends React.Component {
     return (
       <div className="posts-list">
         {posts.map((post) => (
-          <div className="post-wrapper" key={post.id}>
+          <div className="post-wrapper" key={post._id}>
             <div className="post-header">
               <div className="post-avatar">
                 <img src={faker.image.avatar()} alt="user-pic" />
@@ -58,5 +59,10 @@ class PostsList extends React.Component {
     );
   }
 }
+
+// To check the type of props is correct or not
+PostsList.propTypes = {
+  posts: PropTypes.array.isRequired,
+};
 
 export default PostsList;
