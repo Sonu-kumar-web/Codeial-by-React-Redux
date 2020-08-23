@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { fetchPosts } from '../actions/posts';
-import { Home, Navbar, Page404 } from './';
+import { Home, Navbar, Page404, Login } from './';
 
 // const Home = (props) => {
 //   console.log(props);
 //   return <div>Home</div>;
 // };
-const Login = () => <div>Login</div>;
+// const Login = () => <div>Login</div>;
 const Signup = () => <div>Signup</div>;
 const Logout = () => <div>Logout</div>;
 
@@ -20,7 +20,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const { posts } = this.props;
     return (
       <Router>
