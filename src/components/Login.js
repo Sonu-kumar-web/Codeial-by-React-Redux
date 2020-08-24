@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { login } from '../actions/auth';
+import { login, clearAuthState } from '../actions/auth';
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
   /*
@@ -18,13 +19,18 @@ class Login extends React.Component {
     console.log('passwordInputRef', this.passwordInputRef.current.value);
   };*/
 
-  // Form is handled by Controlled component
+  // Form is handled by Controlled component (or navigate from Login page)
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
     };
+  }
+
+  // Called when login page will be destroyed
+  componentWillMount() {
+    this.props.dispatch(clearAuthState());
   }
 
   handleEmailSubmit = (e) => {
@@ -48,7 +54,12 @@ class Login extends React.Component {
   };
 
   render() {
-    const { error, inProgress } = this.props.auth;
+    const { error, inProgress, isLoggedin } = this.props.auth;
+
+    // If user is loggedin then goto home page
+    if (isLoggedin) {
+      return <Redirect to="/" />;
+    }
     return (
       <form className="login-form">
         <span className="login-signup-header">Log In</span>
