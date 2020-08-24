@@ -14,7 +14,7 @@ import {
 const initialAuthState = {
   user: {},
   error: null,
-  isLoggedIn: false,
+  isLoggedin: false,
   inProgress: false, // It is for disable or enable the Login button
 };
 export function auth(state = initialAuthState, action) {
@@ -35,9 +35,9 @@ export function auth(state = initialAuthState, action) {
       return {
         ...state,
         user: action.user,
-        isLoggedIn: true,
-        error: null,
+        isLoggedin: true,
         inProgress: false, // Enable the login button
+        error: null,
       };
     case LOGIN_FAILED:
     case SIGNUP_FAILED:

@@ -9,6 +9,7 @@ import {
   LOG_OUT,
   CLEAR_AUTH_STATE,
 } from './actionTypes';
+
 import { APIUrls } from '../helpers/urls';
 import { getFormBody } from '../helpers/utils';
 
@@ -26,7 +27,7 @@ export function loginFailed(errorMessage) {
   };
 }
 
-export function loginSuccess({ user }) {
+export function loginSuccess(user) {
   return {
     type: LOGIN_SUCCESS,
     user,
@@ -42,7 +43,7 @@ export function login(email, password) {
     fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-ww-form-urlencoded', // Our API is written in "urlencoded" if our API is written in JSON then you don't need to specify 'Content-Type' (you can specify but not compulsory).
+        'Content-Type': 'application/x-www-form-urlencoded', // Our API is written in "urlencoded" if our API is written in JSON then you don't need to specify 'Content-Type' (you can specify but not compulsory).
       },
       body: getFormBody({ email, password }),
     })
@@ -51,6 +52,7 @@ export function login(email, password) {
         console.log('Data', data);
         if (data.success) {
           // dispatch action to save user
+          localStorage.setItem('token', data.data.token);
           dispatch(loginSuccess(data.data.user));
           return;
         }
@@ -81,12 +83,12 @@ export function signup(email, password, confirmPassword, name) {
     fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-ww-form-urlencoded', // Our API is written in "urlencoded" if our API is written in JSON then you don't need to specify 'Content-Type' (you can specify but not compulsory).
+        'Content-Type': 'application/x-www-form-urlencoded', // Our API is written in "urlencoded" if our API is written in JSON then you don't need to specify 'Content-Type' (you can specify but not compulsory).
       },
       body: getFormBody({
         email,
         password,
-        confirm_Password: confirmPassword,
+        confirm_password: confirmPassword,
         name,
       }),
     })
@@ -94,12 +96,12 @@ export function signup(email, password, confirmPassword, name) {
       .then((data) => {
         // console.log('data', data);
         if (data.success) {
-          // do Something
+          // Dispatch action to server
           localStorage.setItem('token', data.data.token); // persistance the data into local storage.
           dispatch(signupSuccessful(data.data.user));
           return;
         }
-        dispatch(signupFailed(data.message));
+        dispatch(loginFailed(data.message));
       });
   };
 }

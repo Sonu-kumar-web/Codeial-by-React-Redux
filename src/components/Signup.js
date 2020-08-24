@@ -65,7 +65,7 @@ class Signup extends Component {
         </div>
         <div className="field">
           <input
-            placeholder="Confirm password"
+            placeholder="Password"
             type="password"
             required
             onChange={(e) =>
@@ -75,7 +75,7 @@ class Signup extends Component {
         </div>
         <div className="field">
           <input
-            placeholder="Password"
+            placeholder="Confirm password"
             type="password"
             required
             onChange={(e) => this.handleInputChange('password', e.target.value)}

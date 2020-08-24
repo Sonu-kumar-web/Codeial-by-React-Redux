@@ -45,11 +45,13 @@ class Navbar extends React.Component {
           {/* If user is Loggedin  then show this*/}
           {auth.isLoggedin && (
             <div className="user">
-              <img
-                src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                alt="user-dp"
-                id="user-dp"
-              />
+              <Link to="/settings">
+                <img
+                  src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                  alt="user-dp"
+                  id="user-dp"
+                />
+              </Link>
               <span>{auth.user.name}</span>
             </div>
           )}
@@ -75,10 +77,10 @@ class Navbar extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+function mapStateToProps(state) {
   return {
     auth: state.auth,
   };
-};
+}
 
 export default connect(mapStateToProps)(Navbar);
