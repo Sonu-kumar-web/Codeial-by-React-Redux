@@ -6,6 +6,7 @@ import * as jwtDecode from 'jwt-decode';
 
 import { fetchPosts } from '../actions/posts';
 import { Home, Navbar, Page404, Login, Signup } from './';
+import { authenticateUser } from '../actions/auth';
 
 // const Home = (props) => {
 //   console.log(props);
@@ -19,9 +20,18 @@ class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
     const token = localStorage.getItem('token');
+
+    // if user is loggedin
     if (token) {
       const user = jwtDecode(token);
       console.log('user', user);
+      this.props.dispatch(
+        authenticateUser({
+          email: user.email,
+          _id: user._id,
+          name: user.name,
+        })
+      );
     }
   }
 
