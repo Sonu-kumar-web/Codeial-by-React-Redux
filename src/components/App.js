@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { fetchPosts } from '../actions/posts';
-import { Home, Navbar, Page404, Login } from './';
+import { Home, Navbar, Page404, Login, Signup } from './';
 
 // const Home = (props) => {
 //   console.log(props);
 //   return <div>Home</div>;
 // };
 // const Login = () => <div>Login</div>;
-const Signup = () => <div>Signup</div>;
-const Logout = () => <div>Logout</div>;
+// const Signup = () => <div>Signup</div>;
+// const Logout = () => <div>Logout</div>;
 
 class App extends React.Component {
   componentDidMount() {
@@ -52,7 +52,7 @@ class App extends React.Component {
 
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/logout" component={Logout} />
+            <Route path="/logout" component={Login} />
             <Route component={Page404} />
           </Switch>
         </div>
