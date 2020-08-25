@@ -56,9 +56,14 @@ class Login extends React.Component {
   render() {
     const { error, inProgress, isLoggedin } = this.props.auth;
 
+    // if "this.props.location.state " is present then "from = this.props.location.state "
+    // else "from = "/" "
+    const { from } = this.props.location.state || { from: { pathname: '/' } }; // Props pass from private route
+
     // If user is loggedin then goto home page
     if (isLoggedin) {
-      return <Redirect to="/" />;
+      // return <Redirect to="/" />;
+      return <Redirect to={from} />;
     }
     return (
       <form className="login-form">
