@@ -10,7 +10,7 @@ import {
 import * as jwtDecode from 'jwt-decode';
 
 import { fetchPosts } from '../actions/posts';
-import { Home, Navbar, Page404, Login, Signup } from './';
+import { Home, Navbar, Page404, Login, Signup, Settings } from './';
 import { authenticateUser } from '../actions/auth';
 
 // const Home = (props) => {
@@ -21,7 +21,7 @@ import { authenticateUser } from '../actions/auth';
 // const Signup = () => <div>Signup</div>;
 // const Logout = () => <div>Logout</div>;
 
-const Settings = () => <div>Setting</div>;
+// const Settings = () => <div>Setting</div>;
 
 // If user is Loggedin then goto the setting page else goto the login page
 const PrivateRoute = (PrivateRouteProps) => {

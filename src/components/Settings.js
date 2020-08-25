@@ -5,12 +5,19 @@ class Settings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      name: props.auth.user.name,
       password: '',
       confirmPassword: '',
       editMode: false,
     };
   }
+
+  // it is a generic method for all handleChange() method
+  handleChange = (fieldName, val) => {
+    this.setState({
+      [fieldName]: val,
+    });
+  };
 
   render() {
     const { user } = this.props.auth;
@@ -23,18 +30,18 @@ class Settings extends React.Component {
             alt="user-dp"
           />
         </div>
-        <div className="filed">
+
+        <div className="field">
           <div className="field-label">Email</div>
           <div className="field-value">{user.email}</div>
         </div>
 
-        <div className="filed">
-          <div className="field-label">name</div>
-
+        <div className="field">
+          <div className="field-label">Name</div>
           {editMode ? (
             <input
               type="text"
-              onChange={() => this.handleChange()}
+              onChange={(e) => this.handleChange('name', e.target.value)}
               value={this.state.name}
             />
           ) : (
@@ -45,9 +52,10 @@ class Settings extends React.Component {
         {editMode && (
           <div className="field">
             <div className="field-label">New password</div>
+
             <input
               type="password"
-              onChange={() => this.handleChange()}
+              onChange={(e) => this.handleChange('password', e.target.value)}
               value={this.state.password}
             />
           </div>
@@ -56,9 +64,12 @@ class Settings extends React.Component {
         {editMode && (
           <div className="field">
             <div className="field-label">Confirm password</div>
+
             <input
               type="password"
-              onChange={() => this.handleChange()}
+              onChange={(e) =>
+                this.handleChange('confirmPassword', e.target.value)
+              }
               value={this.state.confirmPassword}
             />
           </div>
@@ -68,10 +79,23 @@ class Settings extends React.Component {
           {editMode ? (
             <button className="button save-btn">Save</button>
           ) : (
-            <button className="button edit-btn">Edit profile</button>
+            <button
+              className="button edit-btn"
+              onClick={() => this.handleChange('editMode', true)}
+            >
+              Edit profile
+            </button>
+          )}
+
+          {editMode && (
+            <div
+              className="go-back"
+              onClick={() => this.handleChange('editMode', false)}
+            >
+              Go back
+            </div>
           )}
         </div>
-        {editMode && <div className="go-back">Go back </div>}
       </div>
     );
   }
