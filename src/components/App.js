@@ -12,6 +12,7 @@ import * as jwtDecode from 'jwt-decode';
 import { fetchPosts } from '../actions/posts';
 import { Home, Navbar, Page404, Login, Signup, Settings } from './';
 import { authenticateUser } from '../actions/auth';
+import { getAuthTokenFromLocalStorage } from '../helpers/utils';
 
 // const Home = (props) => {
 //   console.log(props);
@@ -52,7 +53,8 @@ const PrivateRoute = (PrivateRouteProps) => {
 class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
+    const token = getAuthTokenFromLocalStorage();
 
     // if user is loggedin
     if (token) {
