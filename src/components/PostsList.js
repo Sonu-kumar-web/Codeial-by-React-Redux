@@ -1,6 +1,7 @@
 import React from 'react';
 import faker from 'faker';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class PostsList extends React.Component {
   render() {
@@ -11,8 +12,9 @@ class PostsList extends React.Component {
           <div className="post-wrapper" key={post._id}>
             <div className="post-header">
               <div className="post-avatar">
-                <img src={faker.image.avatar()} alt="user-pic" />
-
+                <Link to={`/user/${post.user._id}`}>
+                  <img src={faker.image.avatar()} alt="user-pic" />
+                </Link>
                 <div>
                   <span className="post-author">{post.user.name}</span>
                   <span className="post-time">a minutes ago</span>

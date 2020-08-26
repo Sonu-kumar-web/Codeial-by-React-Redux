@@ -112,7 +112,7 @@ class App extends React.Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/logout" component={Login} />
-            <Route path="/user" component={UserProfile} />
+            {/* <Route path="/user" component={UserProfile} /> */}
             <PrivateRoute
               path="/settings"
               component={Settings}
