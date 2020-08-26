@@ -21,6 +21,7 @@ import {
 } from './';
 import { authenticateUser } from '../actions/auth';
 import { getAuthTokenFromLocalStorage } from '../helpers/utils';
+import { fetchUserFriends } from '../actions/friends';
 
 // const Home = (props) => {
 //   console.log(props);
@@ -75,12 +76,13 @@ class App extends React.Component {
           name: user.name,
         })
       );
+      this.props.dispatch(fetchUserFriends());
     }
   }
 
   render() {
     // console.log(this.props);
-    const { posts, auth } = this.props;
+    const { posts, auth, friends } = this.props;
     return (
       <Router>
         <div>
@@ -101,11 +103,25 @@ class App extends React.Component {
 
           <Switch>
             {/* <Route exact={true} path="/" component={Home} /> */}
-            <Route
+            {/* <Route
               exact={true}
               path="/"
               render={(props) => {
                 return <Home {...props} posts={posts} />;
+              }}
+            /> */}
+            <Route
+              exact
+              path="/"
+              render={(props) => {
+                return (
+                  <Home
+                    {...props}
+                    posts={posts}
+                    friends={friends}
+                    isLoggedin={auth.isLoggedin}
+                  />
+                );
               }}
             />
 
