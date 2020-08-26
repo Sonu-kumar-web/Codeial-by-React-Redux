@@ -1,4 +1,4 @@
-import { UPDATE_POSTS, ADD_POST } from '../actions/actionTypes';
+import { UPDATE_POSTS, ADD_POST, ADD_COMMENT } from '../actions/actionTypes';
 
 export default function posts(state = [], action) {
   // {posts:[]}
@@ -10,6 +10,18 @@ export default function posts(state = [], action) {
         action.post,
         ...state, //the new post will post at start and rest pst will be after that
       ];
+    case ADD_COMMENT:
+      const newPosts = state.map((post) => {
+        if (post._id === action.postId) {
+          return {
+            ...post,
+            comments: [action.comment, ...post.comments],
+          };
+        }
+
+        return post;
+      });
+      return newPosts;
     default:
       return state;
   }
