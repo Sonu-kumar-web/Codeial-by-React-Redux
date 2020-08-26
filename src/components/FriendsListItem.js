@@ -1,17 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import faker from 'faker';
 
 function FriendsListItem(props) {
   return (
     <div>
       <Link className="friends-item" to={`user/${props.friend._id}`}>
         <div className="friends-img">
-          <img
-            src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-            alt="user-pic"
-          />
+          <img src={faker.image.avatar()} alt="user-pic" />
         </div>
-        <div className="friends-name">{props.friend.email}</div>
+        <div className="friends-name">{props.friend.name}</div>
       </Link>
     </div>
   );

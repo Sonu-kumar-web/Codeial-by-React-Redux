@@ -10,10 +10,9 @@ const FriendsList = (props) => {
         <div className="no-friends">No friends found!</div>
       )}
 
-      {props.friends &&
-        props.friends.map((friend) => (
-          <FriendsListItem friend={friend.to_user} key={friend._id} />
-        ))}
+      {props.friends.map((friend) => (
+        <FriendsListItem friend={friend.to_user} key={friend._id} />
+      ))}
     </div>
   );
 };
