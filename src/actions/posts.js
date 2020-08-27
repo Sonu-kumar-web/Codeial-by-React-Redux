@@ -1,4 +1,9 @@
-import { UPDATE_POSTS, ADD_POST, ADD_COMMENT } from './actionTypes';
+import {
+  UPDATE_POSTS,
+  ADD_POST,
+  ADD_COMMENT,
+  UPDATE_POST_LIKE,
+} from './actionTypes';
 import { APIUrls } from '../helpers/urls';
 import { getAuthTokenFromLocalStorage, getFormBody } from '../helpers/utils';
 
@@ -81,5 +86,34 @@ export function addComment(comment, postId) {
     type: ADD_COMMENT,
     comment,
     postId,
+  };
+}
+
+// Like a post
+export function addLike(id, likeType, userId) {
+  //likeType means may be post or comment
+  return (dispatch) => {
+    const url = APIUrls.toggleLike(id, likeType);
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded', // Our API is written in "urlencoded" if our API is written in JSON then you don't need to specify 'Content-Type' (you can specify but not compulsory).
+        Authorization: `Bearer ${getAuthTokenFromLocalStorage()}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Like Data', data);
+        if (data.success) {
+          dispatch(addLikesToStore(id, userId));
+        }
+      });
+  };
+}
+export function addLikesToStore(postId, userId) {
+  return {
+    type: UPDATE_POST_LIKE,
+    postId,
+    userId,
   };
 }
