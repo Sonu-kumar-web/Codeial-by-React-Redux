@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import faker from 'faker';
+
 import { fetchUserProfile } from '../actions/profile';
 import { connect } from 'react-redux';
 import { APIUrls } from '../helpers/urls';
 import { getAuthTokenFromLocalStorage } from '../helpers/utils';
 import { addFriend, removeFriend } from '../actions/friends';
+import { searchUsers } from '../actions/search';
 
 class UserProfile extends Component {
   constructor(props) {
@@ -22,6 +24,24 @@ class UserProfile extends Component {
     if (match.params.userId) {
       // dispatch an action
       this.props.dispatch(fetchUserProfile(match.params.userId));
+    }
+  }
+
+  // User when we search and click on new profile page
+  componentDidUpdate(prevProps) {
+    const {
+      match: { params: prevParams },
+    } = prevProps;
+    const {
+      match: { params: currentParams },
+    } = this.props;
+    if (
+      prevParams &&
+      currentParams &&
+      prevParams.userId !== currentParams.userId
+    ) {
+      this.props.dispatch(fetchUserProfile(currentParams.userId));
+      this.props.dispatch(searchUsers(''));
     }
   }
 
