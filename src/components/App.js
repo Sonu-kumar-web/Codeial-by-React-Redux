@@ -68,7 +68,7 @@ class App extends React.Component {
     // if user is loggedin
     if (token) {
       const user = jwtDecode(token);
-      console.log('user', user);
+      // console.log('user', user);
       this.props.dispatch(
         authenticateUser({
           email: user.email,
