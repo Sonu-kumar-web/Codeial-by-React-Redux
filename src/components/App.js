@@ -23,16 +23,6 @@ import { authenticateUser } from '../actions/auth';
 import { getAuthTokenFromLocalStorage } from '../helpers/utils';
 import { fetchUserFriends } from '../actions/friends';
 
-// const Home = (props) => {
-//   console.log(props);
-//   return <div>Home</div>;
-// };
-// const Login = () => <div>Login</div>;
-// const Signup = () => <div>Signup</div>;
-// const Logout = () => <div>Logout</div>;
-
-// const Settings = () => <div>Setting</div>;
-
 // If user is Loggedin then goto the setting page else goto the login page
 const PrivateRoute = (PrivateRouteProps) => {
   const { isLoggedin, path, component: Component } = PrivateRouteProps; // component: Component => Rename the component from "c" to "C"
@@ -40,7 +30,6 @@ const PrivateRoute = (PrivateRouteProps) => {
     <Route
       path={path}
       render={(props) => {
-        // return isLoggedin ? <Component {...props} /> : <Redirect to="/login" />;
         return isLoggedin ? (
           <Component {...props} />
         ) : (
@@ -87,29 +76,8 @@ class App extends React.Component {
       <Router>
         <div>
           <Navbar />
-          {/* <PostsList posts={posts} /> */}
-
-          {/* <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/sign_up">Sign_up</Link>
-            </li>
-          </ul> */}
 
           <Switch>
-            {/* <Route exact={true} path="/" component={Home} /> */}
-            {/* <Route
-              exact={true}
-              path="/"
-              render={(props) => {
-                return <Home {...props} posts={posts} />;
-              }}
-            /> */}
             <Route
               exact
               path="/"

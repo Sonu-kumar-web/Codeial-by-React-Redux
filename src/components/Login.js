@@ -5,20 +5,6 @@ import { login, clearAuthState } from '../actions/auth';
 import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
-  /*
-  ***** form is handled by Uncontrolled component
-  constructor(props) {
-    super(props);
-    this.emailInputRef = React.createRef();
-    this.passwordInputRef = React.createRef();
-  }
-
-  handleFormSubmit = (e) => {
-    e.preventDefault();
-    console.log('emailInputRef', this.emailInputRef);
-    console.log('passwordInputRef', this.passwordInputRef.current.value);
-  };*/
-
   // Form is handled by Controlled component (or navigate from Login page)
   constructor(props) {
     super(props);
